@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
-import { HttpClientModule } from '@angular/common/http'; 
-import { HttpModule } from '@angular/http';
+import { first } from 'rxjs/operators';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   correo: String;
   genero: String;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router, private _flashMessagesService: FlashMessagesService) { }
 
   ngOnInit() {
   }
@@ -33,19 +33,17 @@ export class RegisterComponent implements OnInit {
       genero: this.genero
     } 
 
-    console.log(user);
-
-    this.loginService.agregarUsuario(user).subscribe(data => {
-
-      if ((data as any).success ){  
-        alert('Usuario agregado.');
-        this.router.navigate(['/login']);
-      } else {
-        alert('Error');
-        this.router.navigate(['/register']);
-      }
-
-    });
+    this.loginService.agregarUsuario(user)  
+    .pipe(first())
+    .subscribe(
+        data => {
+            this._flashMessagesService.show('El usuario ha sido registrado.', { cssClass: 'alert-success', timeout: 5000 },  );
+            this.router.navigate(['/login']);
+        },
+        error => {
+          this._flashMessagesService.show('Error durante el registro.', { cssClass: 'alert-danger', timeout: 5000 } );
+            this.router.navigate(['/register']);
+        });
 
   }
 }
