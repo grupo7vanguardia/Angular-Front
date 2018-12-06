@@ -13,14 +13,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
-
+import { HomeCursosComponent } from './components/home-cursos/home-cursos.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeCursosComponent
   ],
   imports: [
     BrowserModule,
