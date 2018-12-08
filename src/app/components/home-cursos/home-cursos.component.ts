@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CursoService } from '../../services/curso.service';
 import { Curso } from '../../models/curso';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { Curso } from '../../models/curso';
 })
 export class HomeCursosComponent implements OnInit {
   cursos:Curso[];
-  constructor(private cursoService:CursoService) { }
+  constructor(private cursoService:CursoService,private router:Router) { }
 
   ngOnInit() {
     this.getCursos();
@@ -22,4 +23,9 @@ export class HomeCursosComponent implements OnInit {
       this.cursos=data.cursos;
     })
   }
+
+  SetCurso(curso){
+    localStorage.setItem('idCurso',curso);
+  }
+
 }

@@ -6,4 +6,5 @@ export interface Curso{
     urlImagen?: string,
     urlVideo?: string,
     examen?: string,
+
 }

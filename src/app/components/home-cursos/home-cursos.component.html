@@ -21,7 +21,7 @@
        <!--LISTADO CURSOS-->
        <div class="col-8">
          <div class="row">
-           <div *ngFor="let curso of cursos" class="col-sm">
+           <div *ngFor="let curso of cursos" class="col-sm-6">
               <div class="card">
                   <div class="card-header bg-primary text-white">
                     <h3>{{curso.titulo}}</h3>
@@ -29,7 +29,7 @@
                   <div class="card-body">
                     <h5 class="card-title">Nivel: {{curso.nivel}}</h5>
                     <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem ipsa harum, consequuntur reiciendis accusamus doloremque neque, nostrum delectus cum maiores cumque consequatur optio laborum voluptatum natus provident quod. Quae, dolor?</p>
-                    <a href="#" class="btn btn-primary">Let's Start</a>
+                    <button class="btn btn-primary" (click)="SetCurso(curso._id)" [routerLink]="['/curso']">Let´s start</button>
                   </div>
                 </div>
            </div>

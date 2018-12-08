@@ -14,6 +14,8 @@ import { HttpModule } from '@angular/http';
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { HomeCursosComponent } from './components/home-cursos/home-cursos.component';
+import { CursoComponent } from './components/curso/curso.component';
+import { ExamenComponent } from './components/examen/examen.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +23,9 @@ import { HomeCursosComponent } from './components/home-cursos/home-cursos.compon
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    HomeCursosComponent
+    HomeCursosComponent,
+    CursoComponent,
+    ExamenComponent
   ],
   imports: [
     BrowserModule,
