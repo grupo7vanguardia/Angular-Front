@@ -1,0 +1,25 @@
+<div class="wrapper">
+    <div style="margin-top: 2.5vh" class="row">
+      <div class="col-6 offset-1 text">
+          <h1>{{titulo}}</h1>
+          <h4>Nivel: {{nivel}}</h4>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-8 offset-2">
+            <div class="embed-responsive embed-responsive-16by9">
+                    <iframe width='901' height='507' [src]='ObtenerURL(url)' frameborder='0' allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen>
+                    </iframe>
+            </div>
+      </div>
+  </div>
+  <br>
+  <div class="row">
+      <div class="col-3 offset-5">
+          <h3>Did you watch the video already?</h3>
+      </div>
+      <div class="col-2">
+          <button style="border-radius: 10%" class="btn btn-block btn-primary"  [routerLink]="['/curso/examen']">Test</button>
+      </div>
+  </div>
+</div>

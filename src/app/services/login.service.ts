@@ -10,8 +10,8 @@ export class LoginService {
   server: String;
 
   constructor(private http: HttpClient) {
-    //this.server = "http://206.189.75.36";
-    this.server = "http://localhost"
+    this.server = "http://206.189.75.36";
+    //this.server = "http://localhost"
    }
 
   agregarUsuario(user) {
