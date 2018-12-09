@@ -16,4 +16,13 @@ export class ExamenService {
     obtenerExamenById(idExamen){
       return this.http.get(this.server + '/api/examenes/'+idExamen);
     }
+
+    agregarNota(calificacion) {
+
+      let headers = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+  
+      return this.http.put(this.server + '/api/examenes', calificacion, { headers });
+      
+    }
 }
