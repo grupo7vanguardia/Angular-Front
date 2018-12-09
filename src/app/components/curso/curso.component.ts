@@ -31,7 +31,7 @@ export class CursoComponent implements OnInit {
     this.cursoService.obtenerCursoById(idCurso).subscribe((data:any)=>{
       this.titulo=data.curso.titulo;
       this.nivel=data.curso.nivel;
-      this.url='https://www.youtube.com/embed/_mglu_eps2A';
+      this.url=data.curso.urlVideo;
       console.log(this.url);
 
       this.SetExamen(data.curso.examen)
