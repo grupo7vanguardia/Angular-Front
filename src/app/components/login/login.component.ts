@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
             if (data.logged){
               this._flashMessagesService.show(data.mensaje, { cssClass: 'alert-success', timeout: 5000 },  );
               this.router.navigate(['/welcome']);
-              localStorage.setItem('idAlumno',data.alumno._id);
+              document.cookie = "alumno=" + JSON.stringify(data.alumno) +"; expires=Thu, 15 Dec 2018 12:00:00 UTC; path=/";
             }else{
               this._flashMessagesService.show(data.mensaje, { cssClass: 'alert-danger', timeout: 5000 },  );
               this.router.navigate(['/login']);

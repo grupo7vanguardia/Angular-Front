@@ -34,6 +34,18 @@ export class LoginService {
 
   isLoggedIn(){
     
+    if (document.cookie){
+      return true;
+    }else{
+      return false;
+    }
+
+  }
+
+  readCookie(){
+      var result = document.cookie.match(new RegExp('alumno=([^;]+)'));
+      result && (result = JSON.parse(result[1]));
+      return result;
   }
 
 }

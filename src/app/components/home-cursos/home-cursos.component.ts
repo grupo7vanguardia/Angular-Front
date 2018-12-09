@@ -1,3 +1,4 @@
+import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { CursoService } from '../../services/curso.service';
 import { Curso } from '../../models/curso';
@@ -10,8 +11,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-cursos.component.css']
 })
 export class HomeCursosComponent implements OnInit {
+  alumno: Object;
   cursos:Curso[];
-  constructor(private cursoService:CursoService,private router:Router) { }
+  constructor(private cursoService:CursoService,private router:Router, private user: LoginService) {
+    this.alumno = user.readCookie();
+  }
 
   ngOnInit() {
     this.getCursos();
@@ -19,7 +23,6 @@ export class HomeCursosComponent implements OnInit {
 
   getCursos(){
     this.cursoService.obtenerCursos().subscribe((data:any)=>{
-      console.log(data);
       this.cursos=data.cursos;
     })
   }
