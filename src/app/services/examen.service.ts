@@ -21,8 +21,8 @@ export class ExamenService {
 
       let headers = new HttpHeaders();
       headers.append('Content-Type', 'application/json');
-  
-      return this.http.put(this.server + '/api/examenes', calificacion, { headers });
+
+      return this.http.put(this.server + '/api/examenes/'+calificacion.examen+'/'+calificacion.alumno+'/'+calificacion.nota, [], { headers });
       
     }
 }

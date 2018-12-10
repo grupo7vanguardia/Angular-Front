@@ -1,9 +1,9 @@
+import { ExamenService } from './../../services/examen.service';
 import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { CursoService } from '../../services/curso.service';
 import { Curso } from '../../models/curso';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-home-cursos',
@@ -13,7 +13,10 @@ import { Router } from '@angular/router';
 export class HomeCursosComponent implements OnInit {
   alumno: Object;
   cursos:Curso[];
-  constructor(private cursoService:CursoService,private router:Router, private user: LoginService) {
+  notaAlumno: any;
+  ex: any;
+
+  constructor(private cursoService:CursoService,private router:Router, private user: LoginService, private examenService: ExamenService) {
     this.alumno = user.readCookie();
   }
 
@@ -24,11 +27,24 @@ export class HomeCursosComponent implements OnInit {
   getCursos(){
     this.cursoService.obtenerCursos().subscribe((data:any)=>{
       this.cursos=data.cursos;
-    })
+    });
+    
   }
 
   SetCurso(curso){
     localStorage.setItem('idCurso',curso);
   }
+
+  //aqui es el cagadal
+  /*probarNota(examen){
+    
+    this.examenService.obtenerExamenById(examen).subscribe(
+      (data:any)=>{
+      
+      console.log(data);
+    });
+    console.log('1');
+    return examen;
+  }*/
 
 }

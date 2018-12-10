@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { ExamenService } from 'src/app/services/examen.service';
 
@@ -10,6 +11,7 @@ export class ExamenComponent implements OnInit {
   idExamen:any;
   preguntas:any[];
   nota:number;
+  cookie: any;
 
   examenCorrecto={
     respuesta0:null,
@@ -23,7 +25,9 @@ export class ExamenComponent implements OnInit {
     respuesta2:null
   }
 
-  constructor(private examenService:ExamenService) { }
+  constructor(private examenService:ExamenService, private loginServ: LoginService) { 
+    this.cookie = loginServ.readCookie();
+  }
 
   ngOnInit() {
     this.idExamen=localStorage.getItem('idExamen');
@@ -70,9 +74,11 @@ export class ExamenComponent implements OnInit {
     }
     this.nota=this.NotaExamen(ejercicio);
 
+    console.log(this.cookie._id);
+
     const calificacion={
       examen:this.idExamen,
-      alumno:localStorage.getItem('idAlumno'),
+      alumno: this.cookie._id,
       nota:this.nota
     }
 
@@ -90,4 +96,6 @@ export class ExamenComponent implements OnInit {
       console.log(data);
     })
   }
+
+  
 }
