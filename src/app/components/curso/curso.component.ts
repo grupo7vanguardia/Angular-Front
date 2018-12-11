@@ -47,14 +47,12 @@ export class CursoComponent implements OnInit {
   obtenerCalificacion(examen){
     
     this.examenService.obtenerExamenById(examen).subscribe((data:any)=>{
-      console.log(data);
-      console.log(this.cookie);
-
       var results = [];
       var searchField = this.cookie._id;
+      console.log(searchField);
       for (var i=0 ; i < data.examen.calificacion.length ; i++)
       {
-        if (data.examen.calificacion[i].alumno = searchField){
+        if (data.examen.calificacion[i].alumno == searchField){
           results.push(parseInt(data.examen.calificacion[i].nota));
         }
       }
