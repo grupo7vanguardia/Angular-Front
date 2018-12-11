@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { ExamenService } from 'src/app/services/examen.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import {Router} from '@angular/router';
-
 @Component({
   selector: 'app-examen',
   templateUrl: './examen.component.html',
@@ -14,6 +13,7 @@ export class ExamenComponent implements OnInit {
   preguntas:any[];
   nota:number;
   cookie: any;
+  examenw: any;
 
   examenCorrecto={
     respuesta0:null,
@@ -28,7 +28,7 @@ export class ExamenComponent implements OnInit {
   }
 
   constructor(private examenService:ExamenService, private loginServ: LoginService, private router: Router, 
-    private _flashMessagesService: FlashMessagesService) { 
+    private _flashMessagesService: FlashMessagesService, ) { 
     this.cookie = loginServ.readCookie();
   }
 
@@ -39,6 +39,7 @@ export class ExamenComponent implements OnInit {
 
   ObtenerExamen(idExamen){
     this.examenService.obtenerExamenById(idExamen).subscribe((data:any)=>{
+      this.examenw = data.examen;
       this.preguntas=data.examen.preguntas;
       this.examenCorrecto.respuesta0=data.examen.preguntas[0].correcta;
       this.examenCorrecto.respuesta1=data.examen.preguntas[1].correcta;
@@ -101,16 +102,25 @@ export class ExamenComponent implements OnInit {
           "_id" : this.cookie._id
         }
 
-        this.loginServ.subirNivel(alumno).subscribe((data:any)=>{
-          this._flashMessagesService.show(data.mensaje, { cssClass: 'alert-success', timeout: 5000 },  );
-        this.router.navigate(['']);
+        if (this.cookie.nivel == this.examenw.nivel)
+        {
+          this.loginServ.subirNivel(alumno).subscribe((data:any)=>{
+            this._flashMessagesService.show(data.mensaje, { cssClass: 'alert-success', timeout: 5000 },  );
+            this.router.navigate(['']);
+          }
+          );
+          document.cookie = "alumno=" + JSON.stringify(this.cookie) +"; expires=Thu, 15 Dec 2010 12:00:00 UTC; path=/";
+        }else{
+          this._flashMessagesService.show("Felicidades, el examen ya habia sido realizado y saco una buena nota.", { cssClass: 'alert-success', timeout: 5000 },  );
+          this.router.navigate(['']);
         }
-        );
+        
 
         
       }else{
         this._flashMessagesService.show("Ha completado el examen con una mala nota.", { cssClass: 'alert-danger', timeout: 5000 },  );
         this.router.navigate(['']);
+        
       }
 
     this.examenService.agregarNota(calificacion).subscribe((data: any)=>{

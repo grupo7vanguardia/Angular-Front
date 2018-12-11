@@ -27,13 +27,17 @@
                   <!-- <div>
                     <h1>{{probarNota(curso.examen)}}</h1>
                   </div> -->
-                  <div class="card-header bg-primary text-white">
+                  <div *ngIf="curso.nivel < alumno.nivel" class="card-header bg-success text-white">
+                    <h3>{{curso.titulo}} - <strong>Curso Aprobado</strong></h3>
+                  </div>
+                  <div *ngIf="curso.nivel >= alumno.nivel" class="card-header bg-primary text-white">
                     <h3>{{curso.titulo}}</h3>
                   </div>
                   <div class="card-body">
                     <h5 class="card-title">Nivel: {{curso.nivel}}</h5>
                     <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem ipsa harum, consequuntur reiciendis accusamus doloremque neque, nostrum delectus cum maiores cumque consequatur optio laborum voluptatum natus provident quod. Quae, dolor?</p>
-                    <button class="btn btn-primary" (click)="SetCurso(curso._id)" [routerLink]="['/curso']">Let´s start</button>
+                    <button *ngIf="curso.nivel < alumno.nivel" class="btn btn-success" (click)="SetCurso(curso._id)" [routerLink]="['/curso']">Repetir Curso</button>
+                    <button *ngIf="curso.nivel >= alumno.nivel" class="btn btn-primary" (click)="SetCurso(curso._id)" [routerLink]="['/curso']">Let´s start</button>
                   </div>
                 </div>
            </div>

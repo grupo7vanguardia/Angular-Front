@@ -2,7 +2,8 @@
     <div style="margin-top: 2.5vh" class="row">
       <div class="col-6 offset-1 text">
           <h1>{{titulo}}</h1>
-          <h4>Nivel: {{nivel}}</h4>
+          <h3>Nivel: {{nivel}}</h3>
+          <h4 *ngIf="examenNota">Su nota: {{examenNota}}</h4>
       </div>
   </div>
   <div class="row">

@@ -17,11 +17,12 @@ export class HomeCursosComponent implements OnInit {
   ex: any;
 
   constructor(private cursoService:CursoService,private router:Router, private user: LoginService, private examenService: ExamenService) {
-    this.alumno = user.readCookie();
+    
   }
 
   ngOnInit() {
     this.getCursos();
+    this.alumno = this.user.readCookie();
   }
 
   getCursos(){
