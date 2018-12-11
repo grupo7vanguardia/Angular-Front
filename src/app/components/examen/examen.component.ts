@@ -1,6 +1,8 @@
 import { LoginService } from 'src/app/services/login.service';
 import { Component, OnInit } from '@angular/core';
 import { ExamenService } from 'src/app/services/examen.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-examen',
@@ -25,7 +27,8 @@ export class ExamenComponent implements OnInit {
     respuesta2:null
   }
 
-  constructor(private examenService:ExamenService, private loginServ: LoginService) { 
+  constructor(private examenService:ExamenService, private loginServ: LoginService, private router: Router, 
+    private _flashMessagesService: FlashMessagesService) { 
     this.cookie = loginServ.readCookie();
   }
 
@@ -92,9 +95,29 @@ export class ExamenComponent implements OnInit {
   }
 
   EnviarExamen(calificacion){
-    this.examenService.agregarNota(calificacion).subscribe((data)=>{
-      console.log(data);
-    })
+      if (calificacion.nota > 66){
+
+        var alumno = {
+          "_id" : this.cookie._id
+        }
+
+        this.loginServ.subirNivel(alumno).subscribe((data:any)=>{
+          this._flashMessagesService.show(data.mensaje, { cssClass: 'alert-success', timeout: 5000 },  );
+        this.router.navigate(['']);
+        }
+        );
+
+        
+      }else{
+        this._flashMessagesService.show("Ha completado el examen con una mala nota.", { cssClass: 'alert-danger', timeout: 5000 },  );
+        this.router.navigate(['']);
+      }
+
+    this.examenService.agregarNota(calificacion).subscribe((data: any)=>{
+      
+    });
+
+    
   }
 
   

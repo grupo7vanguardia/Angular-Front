@@ -15,7 +15,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{alumno.nombre}} {{alumno.apellido}} ({{alumno.usuario}})</h5>
                 <p class="card-text">Bienvenido, a continuacion tiene una variedad de cursos de acuerdo a su nivel. Puede avanzar de nivel al ir completando cursos.</p>
-                <p class="nivel">Nivel: {{alumno.nivel + 1}}</p>
+                <p class="nivel">Nivel: {{alumno.nivel}}</p>
               </div>
             </div>
        </div>
@@ -23,7 +23,7 @@
        <div class="col-8">
          <div class="row" *ngFor="let curso of cursos">
            <div class="col-md-12">
-              <div class="card" *ngIf="curso.nivel <= (alumno.nivel+1)">
+              <div class="card" *ngIf="curso.nivel <= (alumno.nivel)">
                   <!-- <div>
                     <h1>{{probarNota(curso.examen)}}</h1>
                   </div> -->
