@@ -35,7 +35,10 @@
                   </div>
                   <div class="card-body">
                     <h5 class="card-title">Nivel: {{curso.nivel}}</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem ipsa harum, consequuntur reiciendis accusamus doloremque neque, nostrum delectus cum maiores cumque consequatur optio laborum voluptatum natus provident quod. Quae, dolor?</p>
+                    <div class="cent">
+                        <img class="imagencurso" [src]="curso.urlImagen">
+                    </div>
+                    <br>
                     <button *ngIf="curso.nivel < alumno.nivel" class="btn btn-success" (click)="SetCurso(curso._id)" [routerLink]="['/curso']">Repetir Curso</button>
                     <button *ngIf="curso.nivel >= alumno.nivel" class="btn btn-primary" (click)="SetCurso(curso._id)" [routerLink]="['/curso']">Let´s start</button>
                   </div>
